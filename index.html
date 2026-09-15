@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Emma Cohen art portfolio: process work, sustained investigations, selected works, and references." />
+  <title>Emma Cohen | Art Portfolio</title>
+  <style>
+    :root {
+      --paper: #f8f3ec;
+      --paper-2: #fffaf4;
+      --ink: #2d2926;
+      --muted: #756d66;
+      --rose: #b66578;
+      --rose-soft: #ead4d9;
+      --sage: #7d8874;
+      --line: rgba(45, 41, 38, 0.14);
+      --shadow: 0 18px 55px rgba(64, 49, 43, 0.10);
+      --radius: 24px;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(182,101,120,.10), transparent 28rem),
+        radial-gradient(circle at 88% 20%, rgba(125,136,116,.08), transparent 28rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+    }
+
+    img { max-width: 100%; display: block; }
+    button, a { font: inherit; }
+    a { color: inherit; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248,243,236,.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 14px 24px 10px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 2.2vw, 2rem);
+      letter-spacing: .02em;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: .83rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding-bottom: 2px;
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: .2s ease;
+      white-space: nowrap;
+    }
+
+    .tab:hover { color: var(--ink); border-color: var(--line); }
+    .tab.active {
+      color: var(--ink);
+      background: var(--paper-2);
+      border-color: rgba(182,101,120,.30);
+      box-shadow: 0 5px 18px rgba(64,49,43,.05);
+    }
+
+    main { min-height: 70vh; }
+    .page-section { display: none; }
+    .page-section.active { display: block; animation: fadeIn .32s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+    .container {
+      width: min(1180px, calc(100% - 38px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: calc(100vh - 115px);
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: clamp(28px, 5vw, 72px);
+      align-items: center;
+      padding: 64px 0 76px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--rose);
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.08; }
+    h1 { font-size: clamp(3.2rem, 8vw, 6.9rem); margin: 0 0 18px; letter-spacing: -.045em; }
+    h2 { font-size: clamp(2.3rem, 5vw, 4.6rem); margin: 0; letter-spacing: -.035em; }
+    h3 { font-size: clamp(1.55rem, 3vw, 2.25rem); margin: 0 0 14px; }
+
+    .hero-copy .lede {
+      max-width: 660px;
+      font-family: var(--serif);
+      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+      line-height: 1.52;
+      margin: 0 0 22px;
+    }
+
+    .hero-copy .bio {
+      max-width: 680px;
+      color: #524b46;
+      margin: 0 0 16px;
+    }
+
+    .quote {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 11px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,250,244,.72);
+      font-family: var(--serif);
+      font-style: italic;
+    }
+
+    .hero-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      height: min(650px, 68vh);
+    }
+
+    .hero-gallery figure {
+      margin: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #eee5dc;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.7);
+    }
+
+    .hero-gallery figure:first-child { grid-row: 1 / 3; }
+    .hero-gallery img { width: 100%; height: 100%; object-fit: cover; }
+
+    .home-themes {
+      padding: 18px 0 90px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .theme-card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,250,244,.72);
+    }
+    .theme-card strong { display: block; font-family: var(--serif); font-size: 1.2rem; margin-bottom: 6px; }
+    .theme-card span { color: var(--muted); }
+
+    .project-header {
+      padding: 72px 0 46px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 10px;
+    }
+
+    .project-header .meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: .88rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .project-header p {
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .process-stage {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(320px, 1.05fr);
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+      padding: 72px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-stage:nth-of-type(even) .stage-media { order: 2; }
+    .process-stage:nth-of-type(even) .stage-copy { order: 1; }
+
+    .stage-number {
+      color: var(--rose);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .stage-copy p { color: #574f49; margin: 0; }
+    .stage-copy .small-note { margin-top: 12px; color: var(--muted); font-size: .88rem; }
+
+    .carousel {
+      position: relative;
+      width: min(100%, 540px);
+      height: 680px;
+      justify-self: center;
+      background: #ece5dc;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+      display: grid;
+      place-items: center;
+      padding: 24px 24px 78px;
+    }
+
+    .carousel-slide.active { opacity: 1; pointer-events: auto; }
+    .carousel-slide img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 92%;
+      max-height: 92%;
+      object-fit: contain;
+      image-rendering: auto;
+      cursor: zoom-in;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(45,41,38,.08);
+    }
+
+    .carousel-controls {
+      position: absolute;
+      inset: auto 14px 14px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 3;
+    }
+
+    .carousel-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(45,41,38,.15);
+      background: rgba(255,250,244,.92);
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(45,41,38,.08);
+      font-size: 1.2rem;
+    }
+    .carousel-btn:hover { transform: translateY(-1px); }
+
+    .carousel-count {
+      margin-left: auto;
+      margin-right: auto;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(45,41,38,.74);
+      color: white;
+      font-size: .8rem;
+      letter-spacing: .08em;
+    }
+
+    .final-stage {
+      padding: 82px 0 94px;
+      text-align: center;
+    }
+
+    .final-stage .final-art {
+      margin: 28px auto 0;
+      max-width: 760px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,250,244,.8);
+      box-shadow: var(--shadow);
+    }
+
+    .final-art img {
+      width: 100%;
+      max-height: 820px;
+      object-fit: contain;
+      cursor: zoom-in;
+      border-radius: 14px;
+    }
+
+    .selected-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 24px;
+      padding: 50px 0 90px;
+    }
+
+    .work-card {
+      margin: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255,250,244,.78);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .work-card .image-wrap { height: 520px; background: #ece5dc; padding: 16px; }
+    .work-card img { width: 100%; height: 100%; object-fit: contain; border-radius: 14px; cursor: zoom-in; }
+    .work-card figcaption { padding: 20px 22px 24px; font-family: var(--serif); font-size: 1.45rem; }
+
+
+    .featured-reference {
+      display: grid;
+      grid-template-columns: minmax(280px, 480px) minmax(0, 1fr);
+      gap: 42px;
+      align-items: center;
+      margin: 48px 0 12px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255,250,244,.82);
+      box-shadow: var(--shadow);
+    }
+    .featured-reference .image-wrap {
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border-radius: 20px;
+      background: #ece5dc;
+    }
+    .featured-reference img {
+      width: 100%;
+      max-height: 620px;
+      object-fit: contain;
+      border-radius: 14px;
+      cursor: zoom-in;
+    }
+    .featured-reference h3 {
+      margin: 0 0 16px;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 500;
+    }
+    .featured-reference p {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    .reference-list-heading {
+      margin: 52px 0 -24px;
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 500;
+    }
+    @media (max-width: 760px) {
+      .featured-reference { grid-template-columns: 1fr; gap: 24px; padding: 22px; }
+      .featured-reference .image-wrap { min-height: 420px; }
+    }
+
+    .citations-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 20px;
+      padding: 50px 0 90px;
+    }
+
+    .citation-card {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,250,244,.74);
+    }
+    .citation-card img { width: 160px; height: 150px; object-fit: contain; background: #f1ebe4; border-radius: 14px; }
+    .citation-card a { color: var(--rose); overflow-wrap: anywhere; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 20px 42px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(25,22,20,.92);
+      display: none;
+      z-index: 100;
+      place-items: center;
+      padding: 26px;
+    }
+    .lightbox.open { display: grid; }
+    .lightbox img {
+      width: auto;
+      height: auto;
+      max-width: min(94vw, 1300px);
+      max-height: 90vh;
+      object-fit: contain;
+      image-rendering: auto;
+    }
+    .lightbox button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.45rem;
+    }
+
+    @media (max-width: 900px) {
+      .brand-sub { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 44px; }
+      .hero-gallery { height: 520px; }
+      .process-stage { grid-template-columns: 1fr; padding: 54px 0; }
+      .process-stage:nth-of-type(even) .stage-media, .process-stage:nth-of-type(even) .stage-copy { order: initial; }
+      .carousel { width: min(100%, 540px); height: 650px; }
+      .carousel-track { height: 100%; }
+      .selected-grid, .citations-grid { grid-template-columns: 1fr; }
+      .home-themes { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner { padding-inline: 14px; }
+      .container { width: min(100% - 26px, 1180px); }
+      h1 { font-size: clamp(3rem, 16vw, 4.8rem); }
+      .hero-gallery { height: 430px; gap: 8px; }
+      .carousel { width: min(100%, 460px); height: 590px; }
+      .carousel-track { height: 100%; }
+      .carousel-slide { padding: 16px 16px 70px; }
+      .work-card .image-wrap { height: 410px; }
+      .citation-card { grid-template-columns: 105px 1fr; }
+      .citation-card img { width: 105px; height: 110px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <div class="brand">Emma Cohen</div>
+        <div class="brand-sub">Art Portfolio · Alexandria, Virginia</div>
+      </div>
+      <nav class="tabs" aria-label="Portfolio sections">
+        <button class="tab active" data-target="home">About</button>
+        <button class="tab" data-target="fragments">Fragments of Becoming</button>
+        <button class="tab" data-target="tandem">Growing in Tandem</button>
+        <button class="tab" data-target="within-beyond">A World Within and Beyond</button>
+        <button class="tab" data-target="her-own">A World of her Own</button>
+        <button class="tab" data-target="chapters">Chapters of Life</button>
+        <button class="tab" data-target="selected">Selected Works</button>
+        <button class="tab" data-target="citations">Citations</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="page-section active">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Artist · Student · Observer</p>
+            <h1>Emma Cohen</h1>
+            <p class="lede">Emma is a 17-year-old artist from Alexandria, Virginia whose work is rooted in close observation, childhood wonder, femininity, beauty, growth, and the small moments people often pass by.</p>
+            <p class="bio">Her earliest artistic lessons came from drawing beside her grandmother, who would tell her to “squint at it” before putting pencil to paper. What began as a lesson in noticing shadow, light, and form became a way of seeing the world: slow down, look again, and find what might have been missed the first time.</p>
+            <p class="bio">Through AP Art, Emma learned to move beyond perfectionism and comparison and trust the perspective that makes her work distinctly her own. Her portfolio repeatedly returns to family, wildflowers, childhood, transformation, and quiet expressions of wonder.</p>
+          </div>
+          <div class="hero-gallery" aria-label="Featured artwork">
+            <figure><img src="Picture114.jpg" alt="Chapters of Life by Emma Cohen" data-lightbox /></figure>
+            <figure><img src="Picture36.jpg" alt="Fragments of Becoming by Emma Cohen" data-lightbox /></figure>
+            <figure><img src="Picture75.jpg" alt="A World Within and Beyond by Emma Cohen" data-lightbox /></figure>
+          </div>
+        </div>
+        <div class="home-themes">
+          <div class="theme-card"><strong>Observation</strong><span>Looking closely enough to discover meaning in ordinary details.</span></div>
+          <div class="theme-card"><strong>Growth</strong><span>Exploring childhood, maturity, identity, and the transitions between them.</span></div>
+          <div class="theme-card"><strong>Wonder</strong><span>Returning to flowers, family, playfulness, and beauty as enduring visual language.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fragments" class="page-section">
+      <div class="container">
+        <header class="project-header">
+          <div class="meta"><span>Process Portfolio</span></div>
+          <h2>Fragments of Becoming</h2>
+          <p>A study of childhood wonder, safety, innocence, femininity, and the transition toward womanhood through photography, collage, and layered visual symbolism.</p>
+        </header>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture1.jpg|Picture2.jpg|Picture3.jpg|Picture4.jpg|Picture5.jpg|Picture6.jpg|Picture7.jpg|Picture8.jpg|Picture9.jpg|Picture10.jpg|Picture11.jpg|Picture12.jpg|Picture13.jpg|Picture14.jpg|Picture15.jpg|Picture16.jpg|Picture17.jpg|Picture18.jpg|Picture19.jpg|Picture20.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 01 · Reference Photography</div><h3>Capturing childhood wonder</h3><p>For my process, I photographed my little sister’s best friend to capture the youth and wonder of childhood. I used the bunny and flowers as symbols of innocence, beauty, and femininity, while the light shining down represents the hope and possibility that define early life. By exploring multiple angles of the figure and props, I was able to select the most compelling composition for my piece.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture21.jpg|Picture22.jpg|Picture23.jpg|Picture24.jpg|Picture25.jpg|Picture26.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 02 · Exploratory Draft</div><h3>Testing composition and texture</h3><p>This piece began as an exploratory draft, where I arranged materials without adhering them to allow for flexibility. I experimented with paper textures and colors to evoke childhood wonder while developing a more mature, cohesive composition. The placement of each figure reflects themes of femininity and beauty through balance and softness.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture27.jpg|Picture28.jpg|Picture29.jpg|Picture30.jpg|Picture31.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 03 · Refinement</div><h3>Securing and simplifying</h3><p>This second stage marks when I secured the materials to the paper. I refined the composition by removing the ribbon, adjusting the placement of images, and enhancing the layering to create a more cohesive and resolved final piece.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture32.jpg|Picture33.jpg|Picture34.jpg|Picture35.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 04 · Final Selections</div><h3>Safety carried forward</h3><p>These two images are the final selections from my earlier set. I chose the child hugging the bunny to symbolize safety and innocence, and the image of her running to suggest carrying that sense of security forward. In my drawing, this progression reflects the transformation into womanhood, capturing femininity as both beautiful and complex, while preserving a sense of childhood wonder.</p></div>
+        </article>
+
+        <div class="final-stage"><p class="eyebrow">Final Work</p><h2>Fragments of Becoming</h2><div class="final-art"><img src="Picture36.jpg" alt="Fragments of Becoming final artwork" data-lightbox /></div></div>
+      </div>
+    </section>
+
+    <section id="tandem" class="page-section">
+      <div class="container">
+        <header class="project-header">
+          <div class="meta"><span>Process Portfolio</span></div>
+          <h2>Growing in Tandem</h2>
+          <p>A layered exploration of childhood playfulness, femininity, texture, value, and the relationship between drawing and decorative material.</p>
+        </header>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture37.jpg|Picture38.jpg|Picture39.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 01 · Background Study</div><h3>Scratchboard, texture, and white space</h3><p>While developing the background of my piece, I experimented with floral decorative elements to determine whether they complemented the composition. I used scratchboard techniques with black paper, incorporating cross-hatching and stippling to achieve the desired texture and depth. Throughout this process, I struggled with effectively using the white space to allow the image to fully emerge.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture40.jpg|Picture41.jpg|Picture42.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 02 · Material Experimentation</div><h3>Childhood textiles and playfulness</h3><p>For this stage of my process, I experimented with different materials such as ribbon for the girls’ clothing, floral cotton swabs for added detail, and a coquette-style paper bag for the background. I incorporated a variety of textures throughout the piece to emphasize textiles associated with childhood playfulness, while also echoing the ribbon details present in the original reference image.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture43.jpg|Picture44.jpg|Picture45.jpg|Picture46.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 03 · Early Value Studies</div><h3>Learning from overly dark values</h3><p>This row was the first couple of sketches I did where I shaded a bit too dark in the face and messed up my values just a bit.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture47.jpg|Picture48.jpg|Picture49.jpg|Picture50.jpg|Picture51.jpg|Picture52.jpg|Picture53.jpg|Picture54.jpg|Picture55.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 04 · Value Correction</div><h3>Softening the face and arms</h3><p>In these next stages, I recognized that my shading was too dark and used a kneaded eraser to lift graphite from the face and arms, creating a more natural and realistic effect. I also used image transfer techniques to refine the shadows and better capture the depth of the original reference.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture56.jpg|Picture57.jpg|Picture58.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 05 · Final Refinement</div><h3>Resolving the face and background</h3><p>In the final stages of my piece, I refined the face by softening the darker values and resolved the background. The variety of flowers represents the youth and playfulness of childhood, while their color and diversity emphasize beauty and femininity.</p></div>
+        </article>
+
+        <div class="final-stage"><p class="eyebrow">Final Work</p><h2>Growing in Tandem</h2><div class="final-art"><img src="Picture59.jpg" alt="Growing in Tandem final artwork" data-lightbox /></div></div>
+      </div>
+    </section>
+
+    <section id="within-beyond" class="page-section">
+      <div class="container">
+        <header class="project-header">
+          <div class="meta"><span>Process Portfolio</span></div>
+          <h2>A World Within and Beyond</h2>
+          <p>A transition from the vibrancy of childhood into a more complicated reality, using flowers, distressed paper, collage, and fragmented imagery.</p>
+        </header>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture60.jpg|Picture61.jpg|Picture62.jpg|Picture63.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 01 · Exploration</div><h3>Finding the right medium</h3><p>At the start of this process, I sketched the image and explored the themes behind the piece. Unsure of which medium would best convey the emotion, I experimented with different materials, including watercolor, to develop the final direction and mood of the work.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture64.jpg|Picture65.jpg|Picture66.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 02 · Background Development</div><h3>Distressing, fraying, and collage</h3><p>I then developed the background by distressing canvas paper and fraying the edges to add depth and symbolism. I incorporated collage elements to unify the color palette, which later inspired the visual direction of my other pieces.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture67.jpg|Picture68.jpg|Picture69.jpg|Picture70.jpg|Picture71.jpg|Picture72.jpg|Picture73.jpg|Picture74.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 03 · Visual Progression</div><h3>When childhood begins to fade</h3><p>Throughout my process, I used vibrant floral colors to represent the beauty and excitement of childhood. As the composition progresses, the shaded figure reflects the moment youth begins to fade, revealing a more complicated reality. This shift continues as she encounters a hollow, fragmented sketch of the world, suggesting that adulthood is not the fairytale she once imagined. I also burned the edges of the canvas paper to create the effect of reality bleeding into her sense of childhood innocence.</p></div>
+        </article>
+
+        <div class="final-stage"><p class="eyebrow">Final Work</p><h2>A World Within and Beyond</h2><div class="final-art"><img src="Picture75.jpg" alt="A World Within and Beyond final artwork" data-lightbox /></div></div>
+      </div>
+    </section>
+
+    <section id="her-own" class="page-section">
+      <div class="container">
+        <header class="project-header">
+          <div class="meta"><span>Process Portfolio</span></div>
+          <h2>A World of her Own</h2>
+          <p>A portrait-based mixed media work exploring femininity, beauty across cultures, warm color, floral symbolism, and a whimsical hollow form.</p>
+        </header>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture76.jpg|Picture77.jpg|Picture78.jpg|Picture79.jpg|Picture80.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 01 · Portrait Development</div><h3>Building toward the final composition</h3><p>This sequence documents the development of the portrait and surrounding mixed media elements as the piece moves toward its resolved composition.</p><p class="small-note">The PowerPoint presents this sequence visually without a separate paragraph-length caption.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture81.jpg|Picture82.jpg|Picture83(1).jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 02 · Placement &amp; Color Scheme</div><h3>Ideas that fostered the final piece</h3><p>These ideas were ones that fostered my final piece, the flower placement around the object and the colors scheme used for the piece.</p><p class="small-note">This ink swatch I did was the inspiration for my color palette. I wanted the strong warm tones to represent the power of femeninity.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture84(1).jpg|Picture85(1).jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 03 · Base Sketches</div><h3>Whimsy, flowers, and cultural ideas of beauty</h3><p>These base sketches explore the hollow form of the woman and establish the whimsical tone of the piece. The flowers suggest the fleeting beauty of womanhood, while the words for “beauty” written in different languages on the tape reflect how femininity and beauty are interpreted across cultures.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture86(1).jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 04 · Reference</div><h3>Portrait reference</h3><p>This was my reference photo for my woman.</p></div>
+        </article>
+
+        <div class="final-stage"><p class="eyebrow">Final Work</p><h2>A World of her Own</h2><div class="final-art"><img src="Picture87.jpg" alt="A World of her Own final artwork" data-lightbox /></div></div>
+      </div>
+    </section>
+
+    <section id="chapters" class="page-section">
+      <div class="container">
+        <header class="project-header">
+          <div class="meta"><span>Process Portfolio</span></div>
+          <h2>Chapters of Life</h2>
+          <p>A visual progression through childhood, young adulthood, middle age, and later life, connecting maturity, femininity, identity, and symbolic flowers.</p>
+        </header>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture88.jpg|Picture89.jpg|Picture90.jpg|Picture91.jpg|Picture92.jpg|Picture93.jpg|Picture94.jpg|Picture95.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 01 · Concept &amp; References</div><h3>Life stages through paint swatches</h3><p>I developed the concept for this piece by studying paint swatches, using their segmented structure to represent different stages of life: childhood, young adulthood, middle age, and later life. Each section becomes a visual marker of growth and transition, reflecting the progression of maturity over time. I used my sisters as references for the figures, grounding the work in personal experience while exploring themes of femininity, identity, and the evolving perception of beauty throughout life.</p></div>
+        </article>
+
+        <article class="process-stage">
+          <div class="stage-media carousel" data-images="Picture96.jpg|Picture97.jpg|Picture98.jpg|Picture99.jpg|Picture100.jpg|Picture101.jpg|Picture102.jpg|Picture103.jpg|Picture104.jpg|Picture105.jpg|Picture106.jpg|Picture107.jpg|Picture108.jpg|Picture109.jpg|Picture110.jpg|Picture111.jpg|Picture112.jpg|Picture113.jpg"></div>
+          <div class="stage-copy"><div class="stage-number">Stage 02 · Process Development</div><h3>Flowers as markers of growth</h3><p>I drew inspiration from paint swatches and images of my sisters to create this piece, cutting the paper to mirror the segmented structure of a swatch. This format reflects the beauty of growth and the progression of maturity, emphasizing how childhood holds a sense of openness and possibility for what lies ahead. I paired each figure with a symbolic flower to represent different stages of life: the daisy for childhood, the cherry blossom for young adulthood, the rose for middle age, and the lotus for later life—each highlighting evolving ideas of beauty and femininity over time.</p></div>
+        </article>
+
+        <div class="final-stage"><p class="eyebrow">Final Work</p><h2>Chapters of Life</h2><div class="final-art"><img src="Picture114.jpg" alt="Chapters of Life final artwork" data-lightbox /></div></div>
+      </div>
+    </section>
+
+    <section id="selected" class="page-section">
+      <div class="container">
+        <header class="project-header">
+          <div class="meta"><span>Selected Works</span></div>
+          <h2>Selected Works</h2>
+          <p>A selection of finished pieces presented independently from the process investigations.</p>
+        </header>
+        <div class="selected-grid">
+          <figure class="work-card"><div class="image-wrap"><img src="Picture122.jpg" alt="Childhood Perspective" data-lightbox /></div><figcaption>Childhood Perspective</figcaption></figure>
+          <figure class="work-card"><div class="image-wrap"><img src="Picture123.jpg" alt="Watercolor Wonder" data-lightbox /></div><figcaption>Watercolor Wonder</figcaption></figure>
+          <figure class="work-card"><div class="image-wrap"><img src="Picture124.jpg" alt="Emma as a Cover" data-lightbox /></div><figcaption>Emma as a Cover</figcaption></figure>
+          <figure class="work-card"><div class="image-wrap"><img src="Picture125.jpg" alt="The Weight we Hold" data-lightbox /></div><figcaption>The Weight we Hold</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="citations" class="page-section">
+      <div class="container">
+        <header class="project-header">
+          <div class="meta"><span>References</span></div>
+          <h2>Citations and URLs</h2>
+          <p>Visual references cited in the original AP process presentation.</p>
+        </header>
+        <div class="featured-reference">
+          <div class="image-wrap"><img src="Picture126.png" alt="Proportion, anatomy, and clothing reference study" data-lightbox /></div>
+          <div>
+            <h3>Reference Study</h3>
+            <p>This study of proportion, anatomy, and clothing inspired my ninth-grade final project and strengthened my attention to form and detail.</p>
+          </div>
+        </div>
+        <h3 class="reference-list-heading">Additional Visual References</h3>
+        <div class="citations-grid">
+          <div class="citation-card"><img src="Picture115.png" alt="Citation reference 1" data-lightbox /><a href="https://www.pinterest.com/pin/971792425965066480/" target="_blank" rel="noopener">pinterest.com/pin/971792425965066480/</a></div>
+          <div class="citation-card"><img src="Picture116.png" alt="Citation reference 2" data-lightbox /><a href="https://www.pinterest.com/pin/971792425963853033/" target="_blank" rel="noopener">pinterest.com/pin/971792425963853033/</a></div>
+          <div class="citation-card"><img src="Picture118.png" alt="Citation reference 3" data-lightbox /><a href="https://www.pinterest.com/pin/971792425963662457/" target="_blank" rel="noopener">pinterest.com/pin/971792425963662457/</a></div>
+          <div class="citation-card"><img src="Picture117.png" alt="Citation reference 4" data-lightbox /><a href="https://www.pinterest.com/pin/971792425963695269/" target="_blank" rel="noopener">pinterest.com/pin/971792425963695269/</a></div>
+          <div class="citation-card"><img src="Picture119.png" alt="Citation reference 5" data-lightbox /><a href="https://www.pinterest.com/pin/971792425962053374/" target="_blank" rel="noopener">pinterest.com/pin/971792425962053374/</a></div>
+          <div class="citation-card"><img src="Picture120.png" alt="Citation reference 6" data-lightbox /><a href="https://www.pinterest.com/pin/24558760463526155/" target="_blank" rel="noopener">pinterest.com/pin/24558760463526155/</a></div>
+          <div class="citation-card"><img src="Picture121.png" alt="Citation reference 7" data-lightbox /><a href="https://www.pinterest.com/pin/17099673582918856/" target="_blank" rel="noopener">pinterest.com/pin/17099673582918856/</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Emma Cohen · Art Portfolio</footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Artwork preview">
+    <button type="button" aria-label="Close image">×</button>
+    <img src="" alt="Expanded artwork preview" />
+  </div>
+
+  <script>
+    const tabs = [...document.querySelectorAll('.tab')];
+    const sections = [...document.querySelectorAll('.page-section')];
+
+    function showSection(id, updateHash = true) {
+      const section = document.getElementById(id) || document.getElementById('home');
+      sections.forEach(s => s.classList.toggle('active', s === section));
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.target === section.id));
+      if (updateHash) history.replaceState(null, '', section.id === 'home' ? location.pathname : `#${section.id}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => showSection(tab.dataset.target)));
+    window.addEventListener('hashchange', () => showSection(location.hash.slice(1) || 'home', false));
+    if (location.hash) showSection(location.hash.slice(1), false);
+
+    document.querySelectorAll('.carousel').forEach((carousel, carouselIndex) => {
+      const images = (carousel.dataset.images || '').split('|').filter(Boolean);
+      let index = 0;
+      const track = document.createElement('div');
+      track.className = 'carousel-track';
+      images.forEach((src, i) => {
+        const slide = document.createElement('div');
+        slide.className = `carousel-slide${i === 0 ? ' active' : ''}`;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Process image ${i + 1} of ${images.length}`;
+        img.loading = i === 0 ? 'eager' : 'lazy';
+        img.dataset.lightbox = '';
+        slide.appendChild(img);
+        track.appendChild(slide);
+      });
+      carousel.appendChild(track);
+
+      if (images.length > 1) {
+        const controls = document.createElement('div');
+        controls.className = 'carousel-controls';
+        controls.innerHTML = `<button class="carousel-btn prev" type="button" aria-label="Previous image">←</button><span class="carousel-count" aria-live="polite">1 / ${images.length}</span><button class="carousel-btn next" type="button" aria-label="Next image">→</button>`;
+        carousel.appendChild(controls);
+        const slides = [...track.children];
+        const count = controls.querySelector('.carousel-count');
+        const render = () => {
+          slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+          count.textContent = `${index + 1} / ${images.length}`;
+        };
+        controls.querySelector('.prev').addEventListener('click', () => { index = (index - 1 + images.length) % images.length; render(); });
+        controls.querySelector('.next').addEventListener('click', () => { index = (index + 1) % images.length; render(); });
+        carousel.tabIndex = 0;
+        carousel.setAttribute('aria-label', `Image carousel ${carouselIndex + 1}`);
+        carousel.addEventListener('keydown', e => {
+          if (e.key === 'ArrowLeft') { index = (index - 1 + images.length) % images.length; render(); }
+          if (e.key === 'ArrowRight') { index = (index + 1) % images.length; render(); }
+        });
+      }
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('button');
+    document.addEventListener('click', e => {
+      const img = e.target.closest('img[data-lightbox]');
+      if (!img) return;
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || 'Expanded artwork preview';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    });
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+      document.body.style.overflow = '';
+    }
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
+  </script>
+</body>
+</html>
